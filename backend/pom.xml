@@ -17,7 +17,7 @@
 		<java.version>20</java.version>
 		<sonar.organization>goekhanagkurt</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<sonar.projectname>goekhanagkurt_Capstone-Project-Gif-Manager-backend</sonar.projectname>
+		<sonar.projectName>goekhanagkurt_Capstone-Project-Gif-Manager-backend</sonar.projectName>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -42,6 +42,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>gifmanager</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
