@@ -12,7 +12,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/gifs")
 public class GifController {
-    private GifService gifService;
+    private final GifService gifService;
+
+    public GifController(GifService gifService) {
+        this.gifService = gifService;
+    }
 
     @GetMapping
     public List<Gif> getListOfGifs(){return this.gifService.getListOfGifs();

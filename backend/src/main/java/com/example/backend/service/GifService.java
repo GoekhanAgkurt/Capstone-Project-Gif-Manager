@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public class GifService {
-    private GifRepository gifRepository;
+    private final GifRepository gifRepository;
 
     public GifService(GifRepository gifRepository) {
         this.gifRepository = gifRepository;
@@ -16,6 +16,9 @@ public class GifService {
 
     public List<Gif> getListOfGifs() {
         return this.gifRepository.findAll();
+
     }
+
+
 
 }
