@@ -1,43 +1,39 @@
 body {
     background-image: linear-gradient(to right, #27214B, #43397E);
-    margin: 0px;
+    margin: 0;
 }
 
 main {
     width: 90%;
-    align-content: center;;
+    align-content: center;
 }
 
 h1 {
-    font-family: "DIN Alternate";
+    font-family: Arial, sans-serif;
     color: black;
 }
 
 h2 {
-    font-family: "DIN Alternate";
+    font-family: Arial, sans-serif;
     color: #27214B;
     margin: 0;
 }
 
 h3 {
-    font-family: "DIN Alternate";
+    font-family: Arial, sans-serif;
     color: #72BBDB;
 }
 
 h5 {
-    font-family:  "DIN Alternate";
+    font-family: Arial, sans-serif;
     color: #72BBDB;
 }
 
 
-
-
-
-
-p { font-family:  "DIN Alternate";
+p {
+    font-family: Arial, sans-serif;
     color:#27214B;
 }
-
 
 
 .header-container {
