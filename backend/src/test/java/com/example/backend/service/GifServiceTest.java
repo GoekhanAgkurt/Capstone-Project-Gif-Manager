@@ -25,7 +25,7 @@ class GifServiceTest {
         when(gifRepository.findAll()).thenReturn(expected);
         List<Gif> actual = gifService.getListOfGifs();
         //THEN
-        assertEquals(expected, actual);
         verify(gifRepository).findAll();
+        assertEquals(expected, actual);
     }
 }
