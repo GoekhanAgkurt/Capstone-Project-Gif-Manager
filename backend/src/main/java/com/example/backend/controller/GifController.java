@@ -2,10 +2,9 @@ package com.example.backend.controller;
 
 
 import com.example.backend.model.Gif;
+import com.example.backend.model.GifWithoutId;
 import com.example.backend.service.GifService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,8 +18,17 @@ public class GifController {
     }
 
     @GetMapping
-    public List<Gif> getListOfGifs(){return this.gifService.getListOfGifs();
+    public List<Gif> getListOfGifs() {
+        return this.gifService.getListOfGifs();
     }
+
+    @PostMapping
+    public List<Gif> addNewParty(@RequestBody GifWithoutId gifWithoutId){
+        this.gifService.addGif(gifWithoutId);
+        return this.gifService.getListOfGifs();
+    }
+
+
 
 
 }
