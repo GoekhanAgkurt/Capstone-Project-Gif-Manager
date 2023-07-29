@@ -9,6 +9,6 @@ type Props = {
 export default function AddPage(props: Props){
     const newGif: GifWithoutId = {id: "", name: "", description: "", price: ""}
 
-    return <InputForm onSubmitGif={props.onAddGif} gif={newGif} legend={"Add new Party"} backUrl="/" placeholder=""/>
+    return <InputForm onSubmitGif={props.onAddGif} gif={newGif} legend={"Add new Gift"} backUrl="/" placeholder=""/>
 
 }

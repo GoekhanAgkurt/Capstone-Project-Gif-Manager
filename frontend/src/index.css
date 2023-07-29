@@ -50,3 +50,12 @@ p {
     align-items: center;
     width: 100%;
 }
+
+legend {
+    color: #72BBDB;
+    font-family: "Arial", sans-serif;
+}
+
+form {
+    border: none;
+}
