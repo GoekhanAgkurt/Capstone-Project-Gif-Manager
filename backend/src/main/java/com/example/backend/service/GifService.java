@@ -13,13 +13,12 @@ public class GifService {
     private final GifRepository gifRepository;
     private final UuIdService uuIdService;
 
-    public GifService(GifRepository gifRepository, UuIdService uuIdService)
-    {
+    public GifService(GifRepository gifRepository, UuIdService uuIdService){
         this.gifRepository = gifRepository;
         this.uuIdService = uuIdService;
     }
 
-    public List<Gif> getListOfGifs() {
+    public List<Gif> list() {
         return this.gifRepository.findAll();
     }
 

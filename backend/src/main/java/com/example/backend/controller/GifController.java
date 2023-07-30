@@ -1,6 +1,5 @@
 package com.example.backend.controller;
 
-
 import com.example.backend.model.Gif;
 import com.example.backend.model.GifWithoutId;
 import com.example.backend.service.GifService;
@@ -19,16 +18,12 @@ public class GifController {
 
     @GetMapping
     public List<Gif> getListOfGifs() {
-        return this.gifService.getListOfGifs();
+        return this.gifService.list();
     }
 
     @PostMapping
     public List<Gif> addNewParty(@RequestBody GifWithoutId gifWithoutId){
         this.gifService.addGif(gifWithoutId);
-        return this.gifService.getListOfGifs();
+        return this.gifService.list();
     }
-
-
-
-
 }

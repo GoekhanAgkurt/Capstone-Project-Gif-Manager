@@ -33,7 +33,7 @@ export default function InputForm(props: Props) {
     }
 
     const borderStyle: React.CSSProperties = {
-        color: "1px solid #72BBDB", // Hier kannst du die gewünschte Borderfarbe und Stil angeben
+        color: "1px solid #72BBDB",
     };
 
 
