@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GitWithoutId {
+public class GifWithoutId {
     private String name;
     private String description;
     private String price;
