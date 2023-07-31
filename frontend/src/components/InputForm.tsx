@@ -1,4 +1,4 @@
-import {FormEvent, useState} from "react";
+import {ChangeEvent, FormEvent, useState} from "react";
 import Button from "@mui/material/Button";
 import {GifWithoutId} from "../models.ts";
 import {useNavigate} from "react-router-dom";
@@ -15,12 +15,11 @@ type Props = {
 
 export default function InputForm(props: Props) {
 
-    const [name] = useState<string>("");
-    const [description] = useState<string>("");
-    const [price] = useState<string>("");
+    const [name,setName] = useState<string>("");
+    const [description,setDescription ] = useState<string>("");
+    const [price, setPrice] = useState<string>("");
 
     const navigate = useNavigate()
-
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -37,6 +36,15 @@ export default function InputForm(props: Props) {
     };
 
 
+    function handleNameInput(event: ChangeEvent<HTMLInputElement>) {
+    setName(event.target.value)
+    }
+
+    function handleDescriptionInput(event: ChangeEvent<HTMLInputElement>) {
+        setDescription(event.target.value)
+    }    function handlePriceInput(event: ChangeEvent<HTMLInputElement>) {
+        setPrice(event.target.value)
+    }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -50,8 +58,9 @@ export default function InputForm(props: Props) {
                            type="text"
                            value={name}
                            id="name"
+                           onChange={handleNameInput}
                            InputProps={{
-                               style: borderStyle, // Hier weisen wir die benutzerdefinierten Border-Stile zu
+                               style: borderStyle
                            }}
                            required
                 />
@@ -60,12 +69,14 @@ export default function InputForm(props: Props) {
                            type="text"
                            value={description}
                            id="decription"
+                           onChange={handleDescriptionInput}
                            required
                 />
                 <TextField sx={{ml: 0, width: '100%', border:"#72BBDB", mt:2 }}
                            label="Price"
                            type="text"
                            value={price}
+                           onChange={handlePriceInput}
                            id="price"
                            required
                 />

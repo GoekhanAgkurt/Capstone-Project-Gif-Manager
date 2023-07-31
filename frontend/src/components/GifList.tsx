@@ -4,7 +4,12 @@ import {Gif} from "../models.ts";
 import Grid from '@mui/material/Grid';
 import GifCard from "./GifCard.tsx";
 
-export default function GifList() {
+
+type Props = {
+    gifs: Gif[];
+}
+
+export default function GifList(props:Props) {
     const [gifs, setGifs] = useState<Gif[]>([]);
 
     useEffect(() => {
@@ -20,7 +25,7 @@ export default function GifList() {
             <h3>Max Birthdayparty, 21.09.23</h3>
             <h5><b>Number of Gifs: </b>{gifs.length} </h5>
             <Grid container spacing={2}>
-                {gifs.map(gif => (
+                {props.gifs.map(gif => (
                     <Grid key={gif.id} item xs={12}>
                         <GifCard gif={gif} />
                     </Grid>

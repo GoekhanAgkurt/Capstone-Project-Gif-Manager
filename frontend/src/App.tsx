@@ -39,7 +39,7 @@ export default function App() {
                 <Route path={"/"} element={
                     (<Container sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                         <GifList gifs={gifs}/>
-                        <Button sx={{bgcolor: "rgb(44, 161, 173)"}} variant="contained"
+                        <Button  sx={{mt: 2, mr: 2, padding: 2, width: '90%', alignItems:"center", borderColor:"rgb(44, 161, 173)", color:"rgb(44, 161, 173)" }} variant="contained"
                                 disableElevation
                                 onClick={() => navigate("/add")}>
                             + Add Party

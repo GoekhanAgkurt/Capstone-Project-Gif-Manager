@@ -46,4 +46,6 @@ class GifServiceTest {
         verify(gifRepository).insert(expectedGif);
         assertEquals(expectedGif, actualGif);
     }
+
+
 }
