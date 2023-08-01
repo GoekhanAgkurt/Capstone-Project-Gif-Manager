@@ -1,12 +1,13 @@
 import GifList from "./components/GifList.tsx";
 import Header from "./components/Header.tsx";
 import AddPage from "./components/AddPage.tsx";
-import {Gif} from "./models.ts";
+import {Gif, GifWithoutId} from "./models.ts";
 import axios from "axios";
 import {Route, Routes, useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 import {Container} from "@mui/material";
 import {useEffect, useState} from "react";
+import EditPage from "./components/EditGif.tsx";
 
 export default function App() {
 
@@ -30,6 +31,15 @@ export default function App() {
             .then(data => setGifs(data))
     }
 
+    function handleEditGif(id: string, data: GifWithoutId) {
+        axios.put(`api/gifs/${id}`, data)
+            .then(response => response.data)
+            .catch(console.error)
+            .then(data => setGifs(data));
+    }
+
+
+
 
     return (
         <>
@@ -42,10 +52,11 @@ export default function App() {
                         <Button  sx={{mt: 2, mr: 2, padding: 2, width: '90%', alignItems:"center", borderColor:"rgb(44, 161, 173)", color:"rgb(44, 161, 173)" }} variant="contained"
                                 disableElevation
                                 onClick={() => navigate("/add")}>
-                            + Add Party
+                            + Add new Gif
                         </Button>
                     </Container>)
                 }/>
+                <Route path="/:id/edit" element={<EditPage onEditGif={handleEditGif}/>} />
             </Routes>
         </>
     )

@@ -2,6 +2,7 @@ package com.example.backend.controller;
 
 import com.example.backend.model.Gif;
 import com.example.backend.repository.GifRepository;
+import com.example.backend.service.GifService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -12,6 +13,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+
+
+
 @SpringBootTest
 @AutoConfigureMockMvc
 class GifControllerTest {
@@ -21,6 +25,9 @@ class GifControllerTest {
 
     @Autowired
     private GifRepository gifRepository;
+
+    @Autowired
+    private GifService gifService;
 
 
     @Test
@@ -54,9 +61,9 @@ class GifControllerTest {
         // GIVEN
         String gifWithoutId = """
         {
-               "name": "book",
-               "description": "A great book",
-               "price": "19.99"
+               "name": "Pokemon",
+               "description": "Sales on Amazon",
+               "price": "20"
         }
                             """;
         // WHEN
@@ -65,8 +72,47 @@ class GifControllerTest {
             .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").isNotEmpty())
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].name").value("book"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].description").value("A great book"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].price").value("19.99"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].name").value("Pokemon"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].description").value("Sales on Amazon"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].price").value("20"));
     }
+
+
+    @Test
+    @DirtiesContext
+    void expectUpdatedGif_whenEditGif() throws Exception{
+        //GIVEN
+        String initialGifWithoutId = """
+              {
+               "name": "Barbie Puppe",
+               "description": "Sales on Amazon",
+               "price": "20"
+                }
+                                """;
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/gifs").content(initialGifWithoutId).contentType(MediaType.APPLICATION_JSON));
+        String gifWithoutIdToPut="""
+              {
+               "name": "Pokemon",
+               "description": "Sales on Amazon",
+               "price": "20"
+                }
+             """;
+        String id = gifService.list().get(0).getId();
+        String updatedGif = """                   
+                       [ {
+                           "id": "%s",
+                           "name": "Pokemon",
+                           "description": "Sales on Amazon",
+                          "price": "20"
+                         }      ]                  
+                """.formatted(id);
+
+
+        //WHEN
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/gifs/" + id).content(gifWithoutIdToPut).contentType(MediaType.APPLICATION_JSON))
+
+                //THEN
+                .andExpect(MockMvcResultMatchers.content().json(updatedGif)).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
 }

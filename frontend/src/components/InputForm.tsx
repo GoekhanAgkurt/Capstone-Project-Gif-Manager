@@ -29,6 +29,8 @@ export default function InputForm(props: Props) {
             price: price
         }
         props.onSubmitGif(data)
+        navigate("/")
+
     }
 
     const borderStyle: React.CSSProperties = {
@@ -80,7 +82,7 @@ export default function InputForm(props: Props) {
                            id="price"
                            required
                 />
-                <Button sx={{mt: 4, mr: 1, padding: 2, width: '100%',  bgcolor: "rgb(44, 161, 173)"}} type="submit" variant="contained" className="button-right">
+                <Button sx={{mt: 4, mr: 1, padding: 2, width: '100%',  bgcolor: "rgb(44, 161, 173)"}} type="submit" variant="contained" className="button-right" >
                     Submit
                 </Button>
                 <Button sx={{mt: 2, mr: 2, padding: 2, width: '100%', borderColor:"rgb(44, 161, 173)", color:"rgb(44, 161, 173)" }} type="submit" variant="outlined"  disableElevation onClick={() => navigate("/")}>
