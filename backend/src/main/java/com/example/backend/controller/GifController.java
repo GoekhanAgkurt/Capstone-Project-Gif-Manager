@@ -23,7 +23,9 @@ public class GifController {
 
     @GetMapping("/{id}")
     public Gif getGifById(@PathVariable String id){
-        return gifService.getGifById(id);
+       // return gifService.getGifById(id);
+        this.gifService.getGifById(id);
+        return this.gifService.getGifById(id);
     }
 
     @PostMapping
