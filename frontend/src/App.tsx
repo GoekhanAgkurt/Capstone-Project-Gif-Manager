@@ -7,7 +7,7 @@ import {Route, Routes, useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 import {Container} from "@mui/material";
 import {useEffect, useState} from "react";
-import EditPage from "./components/EditGif.tsx";
+import EditGif from "./components/EditGif.tsx";
 
 export default function App() {
 
@@ -24,20 +24,19 @@ export default function App() {
     }, [])
 
 
-    function handleAddGif(data: { name: string, description: string, price: string }) {
-        axios.post('api/gifs', data)
+    function handleAddGif(data: GifWithoutId) {
+        axios.post('/api/gifs', data)
             .then(response => response.data)
             .catch(console.error)
             .then(data => setGifs(data))
     }
 
-    function handleEditGif(id: string, data: GifWithoutId) {
-        axios.put(`api/gifs/${id}`, data)
+    function handleEditGif( data: Gif) {
+        axios.put('/api/gifs/'+ data.id, data)
             .then(response => response.data)
             .catch(console.error)
             .then(data => setGifs(data));
     }
-
 
 
 
@@ -56,7 +55,7 @@ export default function App() {
                         </Button>
                     </Container>)
                 }/>
-                <Route path="/:id/edit" element={<EditPage onEditGif={handleEditGif}/>} />
+                <Route path="/:id/edit" element={<EditGif onEditGif={handleEditGif}gifs={gifs}/>} />
             </Routes>
         </>
     )

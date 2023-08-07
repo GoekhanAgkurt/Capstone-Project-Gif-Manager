@@ -1,5 +1,4 @@
 import Card from '@mui/material/Card';
-import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
@@ -19,6 +18,7 @@ export default function GifCard(props: Props) {
     const {name, description, price} = props.gif;
     const theme = createTheme({});
     const navigate = useNavigate();
+
 
 
     return (

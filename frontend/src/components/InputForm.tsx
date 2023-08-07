@@ -1,16 +1,17 @@
-import {ChangeEvent, FormEvent, useState} from "react";
+import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import Button from "@mui/material/Button";
-import {GifWithoutId} from "../models.ts";
+import {Gif, GifWithoutId} from "../models.ts";
 import {useNavigate} from "react-router-dom";
 import {TextField} from "@mui/material";
 
 
 type Props = {
-    onSubmitGif: (data: GifWithoutId) => void
-    gif: GifWithoutId | undefined
+    onAddGif?: (data: GifWithoutId) => void
+    onEditGif?:(data: Gif) => void
     legend: string
     backUrl: string
     placeholder: string
+    gif?: Gif
 }
 
 export default function InputForm(props: Props) {
@@ -21,17 +22,42 @@ export default function InputForm(props: Props) {
 
     const navigate = useNavigate()
 
+
+    // Wenn ein gif-Objekt vorhanden ist, initialisiere die State-Variablen mit den alten Werten
+
+    useEffect(() => {
+        if (props.gif) {
+            setName(props.gif.name);
+            setDescription(props.gif.description);
+            setPrice(props.gif.price);
+        }
+    }, [props.gif]);
+
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        const data = {
-            name: name,
-            description: description,
-            price: price
-        }
-        props.onSubmitGif(data)
-        navigate("/")
 
+            if (props.onAddGif){
+                const data = {
+                name: name,
+                description: description,
+                price: price
+            }
+                props.onAddGif(data);
+            }
+
+            if (props.onEditGif && props.gif){
+                const data = {
+                    id: props.gif.id,
+                    name: name,
+                    description: description,
+                    price: price
+                }
+                props.onEditGif(data);
+            }
+        navigate("/")
     }
+
+
 
     const borderStyle: React.CSSProperties = {
         color: "1px solid #72BBDB",
@@ -48,8 +74,13 @@ export default function InputForm(props: Props) {
         setPrice(event.target.value)
     }
 
+
+
+
+
+
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={props.gif?handleSubmit:handleSubmit}>
             <fieldset style={{border: "none", fontFamily:"bodoni" }}>
                 <legend style={{marginBottom: '0px',  fontWeight: 'bold', fontSize: '25px'}}>Add new Gift</legend>
 
@@ -90,5 +121,7 @@ export default function InputForm(props: Props) {
                 </Button>
             </fieldset>
         </form>
+
+
     )
 }
