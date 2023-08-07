@@ -37,9 +37,4 @@ public class GifService {
         return this.gifRepository.save(editedGif);
     }
 
-    public Gif getGifById(String id) {
-        Gif gif= this.gifRepository.findById(id)
-                .orElseThrow(()-> new NoSuchElementException("Gif with Id" + id + "not found"));
-
-        return this.gifRepository.save(gif);    }
 }
