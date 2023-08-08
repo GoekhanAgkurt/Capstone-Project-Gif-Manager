@@ -32,7 +32,7 @@ export default function GifCard(props: Props) {
                             <b>Description:</b> {description}
                         </Typography>
                         <Typography variant="body2">
-                            <b>Price:</b> {price}
+                            <b>Price:</b> {price} <> Euro </>
                         </Typography>
 
                         <Button sx={{bgcolor: "rgb(44, 161, 173)"}} type="submit" variant="contained" className="button-right" onClick={() => navigate(`/${props.gif.id}/edit`)}>
