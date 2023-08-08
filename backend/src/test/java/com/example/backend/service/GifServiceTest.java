@@ -65,5 +65,18 @@ class GifServiceTest {
         assertEquals(expected,actual);
     }
 
+    @Test
+    void expectedDeleteExistingGif_whenDeleteGif() {
+        //when
+        String gifId = "123";
+        Gif existingGif = new Gif();
+        //when
+        when(gifRepository.findById(gifId)).thenReturn(Optional.of(existingGif));
+
+        gifService.deleteGif(gifId);
+
+        //then
+        verify(gifRepository, times(1)).delete(existingGif);
+    }
 
 }

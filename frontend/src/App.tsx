@@ -8,12 +8,18 @@ import Button from "@mui/material/Button";
 import {Container} from "@mui/material";
 import {useEffect, useState} from "react";
 import EditGif from "./components/EditGif.tsx";
+import GifCard from "./components/GifCard.tsx";
+
+
 
 export default function App() {
 
     const navigate = useNavigate();
     const [gifs, setGifs] = useState<Gif[]>([]);
 
+    useEffect(() => {
+        fetchGifs();
+    }, []);
 
 
     useEffect(() => {
@@ -38,6 +44,22 @@ export default function App() {
             .then(data => setGifs(data));
     }
 
+    function fetchGifs() {
+        axios.get('api/gifs')
+            .then(response => response.data)
+            .catch(console.error)
+            .then(data => setGifs(data))
+    }
+
+    function deleteThisGif(id: string) {
+        axios.delete(`/api/gifs/${id}`)
+            .catch(error => {
+                console.error(error);
+        setGifs(gifs.filter(gif => gif.id !== id))
+        navigate("/")
+            })
+    }
+
 
 
     return (
@@ -48,14 +70,19 @@ export default function App() {
                 <Route path={"/"} element={
                     (<Container sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                         <GifList gifs={gifs}/>
-                        <Button  sx={{mt: 2, mr: 2, padding: 2, width: '90%', alignItems:"center", borderColor:"rgb(44, 161, 173)", color:"rgb(44, 161, 173)" }} variant="contained"
+                        <Button  sx={{mt: 2, padding: 2, width: '90%', alignItems:"center", backgroundColor:"lightseagreen", color:"#27214B", fontWeight:"bold" }} variant="contained"
                                 disableElevation
                                 onClick={() => navigate("/add")}>
-                            + Add new Gif
+                            Add a new Gift
                         </Button>
                     </Container>)
                 }/>
                 <Route path="/:id/edit" element={<EditGif onEditGif={handleEditGif}gifs={gifs}/>} />
+
+                <Route path={"/:id"}>
+                    <Route index element={<GifCard onDeleteGif={deleteThisGif} />}/>
+                </Route>
+
             </Routes>
         </>
     )

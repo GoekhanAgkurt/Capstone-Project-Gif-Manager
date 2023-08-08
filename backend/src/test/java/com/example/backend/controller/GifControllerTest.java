@@ -13,7 +13,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @SpringBootTest
@@ -51,7 +56,7 @@ class GifControllerTest {
         //when
         mockMvc.perform(MockMvcRequestBuilders.get("/api/gifs"))
                 //then
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(expected));
     }
 
@@ -69,7 +74,7 @@ class GifControllerTest {
         // WHEN
         mockMvc.perform(MockMvcRequestBuilders.post("/api/gifs").content(gifWithoutId).contentType(MediaType.APPLICATION_JSON))
         // THEN
-            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].name").value("Pokemon"))
@@ -112,12 +117,26 @@ class GifControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.put("/api/gifs/" + id).content(gifWithoutIdToPut).contentType(MediaType.APPLICATION_JSON))
 
                 //THEN
-                .andExpect(MockMvcResultMatchers.content().json(updatedGif)).andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.content().json(updatedGif)).andExpect(status().isOk());
     }
 
 
+    @Test
+    @DirtiesContext
+    void expectedDeleteExistingGif_whenDeleteGif() throws Exception {
+        //GIVEN
+        List<Gif> gifs = new ArrayList<>();
+        gifs.add(new Gif("123","Pokemon", "auf Amazon", "20" ));
+        gifRepository.insert(gifs);
+        String id = gifService.list().get(0).getId();
 
+        //WHEN
+        mockMvc.perform(
+                MockMvcRequestBuilders.delete("/api/gifs/" + id)
+        )
 
-
+        //THEN
+                .andExpect(status().isNoContent());
+    }
 
 }

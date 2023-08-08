@@ -3,6 +3,8 @@ package com.example.backend.controller;
 import com.example.backend.model.Gif;
 import com.example.backend.model.GifWithoutId;
 import com.example.backend.service.GifService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +23,10 @@ public class GifController {
         return this.gifService.list();
     }
 
-
+    @GetMapping("/{id}")
+    public Gif getGifById(@PathVariable String id){
+        return this.gifService.getGifById(id);
+    }
 
     @PostMapping
     public List<Gif> addNewGif(@RequestBody GifWithoutId gifWithoutId){
@@ -36,4 +41,13 @@ public class GifController {
     }
 
 
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable String id) {
+        gifService.deleteGif(id);
+    }
+
 }
+
+
