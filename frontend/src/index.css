@@ -59,3 +59,14 @@ legend {
 form {
     border: none;
 }
+
+button {
+    border: none;
+    background-color: #27214B;
+    padding: 10px 30px 10px 30px;
+    color: #72BBDB;
+    border-radius: 40px;
+    margin-top: 20px;
+    font-family: "Arial",  Serif;
+}
+

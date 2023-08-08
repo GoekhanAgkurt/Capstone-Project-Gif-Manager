@@ -21,7 +21,10 @@ public class GifController {
         return this.gifService.list();
     }
 
-
+    @GetMapping("/{id}")
+    public Gif getGifById(@PathVariable String id){
+        return this.gifService.getGifById(id);
+    }
 
     @PostMapping
     public List<Gif> addNewGif(@RequestBody GifWithoutId gifWithoutId){
@@ -34,6 +37,10 @@ public class GifController {
         this.gifService.editGifById(gifWithoutId,id);
         return gifService.list();
     }
+
+    @DeleteMapping("{id}")
+    void delete(@PathVariable String id) { gifService.delete(id);}
+
 
 
 }

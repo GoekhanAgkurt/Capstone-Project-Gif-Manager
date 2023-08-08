@@ -75,12 +75,8 @@ export default function InputForm(props: Props) {
     }
 
 
-
-
-
-
     return (
-        <form onSubmit={props.gif && handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <fieldset style={{border: "none", fontFamily:"bodoni" }}>
                 <legend style={{marginBottom: '0px',  fontWeight: 'bold', fontSize: '25px'}}>Add new Gift</legend>
 
