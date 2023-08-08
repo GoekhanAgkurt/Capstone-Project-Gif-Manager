@@ -21,9 +21,19 @@ public class GifController {
         return this.gifService.list();
     }
 
+
+
     @PostMapping
-    public List<Gif> addNewParty(@RequestBody GifWithoutId gifWithoutId){
+    public List<Gif> addNewGif(@RequestBody GifWithoutId gifWithoutId){
         this.gifService.addGif(gifWithoutId);
         return this.gifService.list();
     }
+
+    @PutMapping("/{id}")
+    public List<Gif> updateGifById(@PathVariable String id, @RequestBody GifWithoutId gifWithoutId){
+        this.gifService.editGifById(gifWithoutId,id);
+        return gifService.list();
+    }
+
+
 }

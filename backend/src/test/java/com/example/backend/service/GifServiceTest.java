@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -45,6 +46,23 @@ class GifServiceTest {
         verify(uuIdService).getRandomId();
         verify(gifRepository).insert(expectedGif);
         assertEquals(expectedGif, actualGif);
+    }
+
+    @Test
+    void expectedEditedGifs_whenEditingGif() {
+        //GIVEN
+        String id = "123";
+        GifWithoutId gifWithoutId = new GifWithoutId("name", "description", "price");
+        Gif expected = new Gif("123", "name", "description", "price");
+        //WHEN
+        when(gifRepository.findById(id)).thenReturn(Optional.of(expected));
+        when(gifRepository.save(expected)).thenReturn(expected);
+        Gif actual = gifService.editGifById(gifWithoutId, id);
+
+        //THEN
+        verify(gifRepository).findById(id);
+        verify(gifRepository).save(expected);
+        assertEquals(expected,actual);
     }
 
 
