@@ -9,7 +9,6 @@ type Props= {
     onDeleteGif: (id: string)=> void
 }
 
-
 export default function GifCard(props: Props) {
 
 
