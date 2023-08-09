@@ -40,6 +40,10 @@ public class GifController {
         return gifService.list();
     }
 
+    @DeleteMapping("{id}")
+    void delete(@PathVariable String id) { gifService.delete(id);}
+
+
 
 
     @DeleteMapping("{id}")
