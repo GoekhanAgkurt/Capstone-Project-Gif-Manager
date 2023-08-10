@@ -2,15 +2,13 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-
-
+import {useNavigate,} from "react-router-dom";
 import {Gif} from "../models.ts";
-import Button from "@mui/material/Button";
-import {useNavigate} from "react-router-dom";
 
 
 type Props= {
     gif: Gif;
+    onDeleteGif: (id: string)=> void
 }
 
 export default function GifCard(props: Props) {
@@ -35,9 +33,11 @@ export default function GifCard(props: Props) {
                             <b>Price:</b> {price} <> Euro </>
                         </Typography>
 
-                        <Button sx={{bgcolor: "rgb(44, 161, 173)"}} type="submit" variant="contained" className="button-right" onClick={() => navigate(`/${props.gif.id}/edit`)}>
+                        <button onClick={() => props.onDeleteGif(props.gif.id)}> Löschen </button>
+
+                        <button  onClick={() => navigate(`/${props.gif.id}/edit`)}>
                             Edit
-                        </Button>
+                        </button>
 
                     </CardContent>
             </Card>

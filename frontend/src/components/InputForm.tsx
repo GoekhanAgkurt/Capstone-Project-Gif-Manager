@@ -16,6 +16,8 @@ type Props = {
 
 export default function InputForm(props: Props) {
 
+
+
     const [name,setName] = useState<string>("");
     const [description,setDescription ] = useState<string>("");
     const [price, setPrice] = useState<string>("");
@@ -75,16 +77,12 @@ export default function InputForm(props: Props) {
     }
 
 
-
-
-
-
     return (
-        <form onSubmit={props.gif && handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <fieldset style={{border: "none", fontFamily:"bodoni" }}>
                 <legend style={{marginBottom: '0px',  fontWeight: 'bold', fontSize: '25px'}}>Add new Gift</legend>
 
-                <p style={{color:"#72BBDB"}}>Fill out the textfields so everybody can Giftwishes</p>
+                <p style={{color:"#72BBDB"}}>Fill out the textfields so everybody can see youre giftlist</p>
 
                 <TextField sx={{ml: 0, width: '100%', border:"#72BBDB", mt:2, }}
                            label="Name"
@@ -105,7 +103,7 @@ export default function InputForm(props: Props) {
                            onChange={handleDescriptionInput}
                            required
                 />
-                <TextField sx={{ml: 0, width: '100%', border:"#72BBDB", mt:2 }}
+                <TextField sx={{ml: 0, width: '100%', Color: "#72BBDB", mt:2 }}
                            label="Price"
                            type="text"
                            value={price}
@@ -113,10 +111,11 @@ export default function InputForm(props: Props) {
                            id="price"
                            required
                 />
-                <Button sx={{mt: 4, mr: 1, padding: 2, width: '100%',  bgcolor: "rgb(44, 161, 173)"}} type="submit" variant="contained" className="button-right" >
+                <Button sx={{mt: 4, mr: 1, padding: 2, width: '100%',  backgroundColor: "lightseagreen", color:"#27214B", fontWeight:"bold"}} type="submit" variant="contained" className="button-right" >
                     Submit
                 </Button>
-                <Button sx={{mt: 2, mr: 2, padding: 2, width: '100%', borderColor:"rgb(44, 161, 173)", color:"rgb(44, 161, 173)" }} type="submit" variant="outlined"  disableElevation onClick={() => navigate("/")}>
+
+                <Button sx={{mt: 2, mr: 2, padding: 2, width: '100%', borderColor:"lightseagreen", color:"lightseagreen", fontWeight:"bold" }} type="submit" variant="outlined"  disableElevation onClick={() => navigate("/")}>
                     Cancel
                 </Button>
             </fieldset>

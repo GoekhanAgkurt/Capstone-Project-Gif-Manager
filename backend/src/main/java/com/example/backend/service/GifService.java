@@ -36,4 +36,17 @@ public class GifService {
         Gif editedGif = new Gif(gif.getId(), g.getName(), g.getDescription(), g.getPrice());
         return this.gifRepository.save(editedGif);
     }
+
+
+    public Gif getGifById(String id) {
+        return this.gifRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Gif mit der ID " + id + " wurde nicht gefunden"));
+    }
+
+
+    public void deleteGif(String id) {
+        Gif gif = this.gifRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException(id));
+        this.gifRepository.delete(gif);
+    }
 }

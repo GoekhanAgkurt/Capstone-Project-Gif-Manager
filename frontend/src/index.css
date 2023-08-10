@@ -1,5 +1,5 @@
 body {
-    background-image: linear-gradient(to right, #27214B, #43397E);
+    background-color: #27214B ;
     margin: 0;
 }
 
@@ -27,6 +27,7 @@ h3 {
 h5 {
     font-family: Arial, sans-serif;
     color: #72BBDB;
+    margin: 0px;
 }
 
 
@@ -59,3 +60,16 @@ legend {
 form {
     border: none;
 }
+
+button {
+    border: none;
+    background-color: #27214B;
+    padding: 10px 5px 10px 5px;
+    color: #72BBDB;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-right: 10px;
+    font-family: "Arial",  Serif;
+    min-width: 117px;
+}
+
