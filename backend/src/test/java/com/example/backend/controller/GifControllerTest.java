@@ -15,9 +15,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -59,6 +57,54 @@ class GifControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(expected));
     }
+
+
+
+
+
+
+
+
+
+
+    @Test
+    @DirtiesContext
+    void expectGif_whenGettingById() throws Exception{
+        //Given
+        List<Gif> gifs = new ArrayList<>();
+        gifs.add(new Gif("123", "Pokemon", "Beschreibung","20"));
+        gifRepository.insert(gifs);
+        String id = gifService.list().get(0).getId();
+
+        String expected = """
+                        {
+                            "id": "123",
+                            "name": "Pokemon",
+                            "description": "Beschreibung",
+                            "price": "20"
+                         }
+                """;
+
+        //when
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/gifs/" +id))
+
+                // Then
+                .andExpect(MockMvcResultMatchers.content().json(expected)).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Test
     @DirtiesContext
