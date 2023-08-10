@@ -40,7 +40,6 @@ public class GifController {
     }
 
 
-
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable String id) {

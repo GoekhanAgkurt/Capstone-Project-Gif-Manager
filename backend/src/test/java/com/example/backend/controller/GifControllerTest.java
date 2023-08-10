@@ -58,15 +58,6 @@ class GifControllerTest {
                 .andExpect(MockMvcResultMatchers.content().json(expected));
     }
 
-
-
-
-
-
-
-
-
-
     @Test
     @DirtiesContext
     void expectGif_whenGettingById() throws Exception{
@@ -91,20 +82,6 @@ class GifControllerTest {
                 // Then
                 .andExpect(MockMvcResultMatchers.content().json(expected)).andExpect(MockMvcResultMatchers.status().isOk());
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @Test
     @DirtiesContext
