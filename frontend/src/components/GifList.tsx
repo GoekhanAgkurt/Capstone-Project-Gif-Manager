@@ -7,6 +7,7 @@ import GifCard from "./GifCard.tsx";
 
 type Props = {
     gifs: Gif[];
+    onDeleteGif: (id: string) => void;
 }
 
 export default function GifList(props:Props) {
@@ -27,7 +28,7 @@ export default function GifList(props:Props) {
             <Grid container spacing={2}>
                 {props.gifs.map(gif => (
                     <Grid key={gif.id} item xs={12}>
-                        <GifCard gif={gif} />
+                        <GifCard onDeleteGif={props.onDeleteGif} gif={gif} />
                     </Grid>
                 ))}
             </Grid>

@@ -2,15 +2,16 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {useNavigate} from "react-router-dom";
+import {useNavigate,} from "react-router-dom";
+import {Gif} from "../models.ts";
 
 
 type Props= {
+    gif: Gif;
     onDeleteGif: (id: string)=> void
 }
 
 export default function GifCard(props: Props) {
-
 
     const {name, description, price} = props.gif;
     const theme = createTheme({});

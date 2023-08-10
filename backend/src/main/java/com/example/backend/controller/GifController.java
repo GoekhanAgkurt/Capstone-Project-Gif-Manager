@@ -4,7 +4,6 @@ import com.example.backend.model.Gif;
 import com.example.backend.model.GifWithoutId;
 import com.example.backend.service.GifService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,10 +39,6 @@ public class GifController {
         return gifService.list();
     }
 
-    @DeleteMapping("{id}")
-    void delete(@PathVariable String id) { gifService.delete(id);}
-
-
 
 
     @DeleteMapping("{id}")
@@ -53,5 +48,3 @@ public class GifController {
     }
 
 }
-
-
