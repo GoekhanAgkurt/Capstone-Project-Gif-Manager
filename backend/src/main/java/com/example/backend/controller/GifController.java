@@ -27,6 +27,7 @@ public class GifController {
         return this.gifService.getGifById(id);
     }
 
+
     @PostMapping
     public List<Gif> addNewGif(@RequestBody GifWithoutId gifWithoutId){
         this.gifService.addGif(gifWithoutId);

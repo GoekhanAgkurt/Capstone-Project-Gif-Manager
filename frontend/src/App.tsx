@@ -8,6 +8,8 @@ import Button from "@mui/material/Button";
 import {Container} from "@mui/material";
 import {useEffect, useState} from "react";
 import EditGif from "./components/EditGif.tsx";
+import {toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -34,6 +36,8 @@ export default function App() {
             .then(response => response.data)
             .catch(console.error)
             .then(data => setGifs(data))
+        toast.success("Dein Gift wurde erfolgreich hinzugefügt!")
+
     }
 
     function handleEditGif( data: Gif) {
@@ -41,6 +45,9 @@ export default function App() {
             .then(response => response.data)
             .catch(console.error)
             .then(data => setGifs(data));
+        toast.success("Dein Gift wurde erfolgreich bearbeitet!")
+
+
     }
 
     function fetchGifs() {
@@ -52,20 +59,36 @@ export default function App() {
 
     function deleteThisGif(id: string) {
         axios.delete(`/api/gifs/${id}`)
-
             .catch(error => {
                 console.error(error);
             })
-       // Lösch aus dem Front  die aktuelle nach dem löschen
+
+            // Lösch aus dem Front  die aktuelle nach dem löschen
             .then(()=> {
                 setGifs(gifs.filter(gif => gif.id !== id))
                 navigate("/")
             })
+        toast.error("Dein Gift wurde gelöscht!")
+
     }
 
 
     return (
         <>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+
+                style={{width: "95%", color:"red"}}
+            />
+
             <Header/>
             <Routes>
                 <Route path={"/add"} element={<AddPage onAddGif={handleAddGif}/>}/>
@@ -81,6 +104,8 @@ export default function App() {
                 }/>
                 <Route path="/:id/edit" element={<EditGif onEditGif={handleEditGif} gifs ={gifs}/>} />
             </Routes>
+
+
         </>
     )
 }
