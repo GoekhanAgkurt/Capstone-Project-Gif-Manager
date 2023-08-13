@@ -8,14 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.request.RequestPostProcessor;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -35,6 +38,7 @@ class GifControllerTest {
 
     @Test
     @DirtiesContext
+    @WithMockUser
     void expectedGifList_whenGettingGifList() throws Exception {
         //Given
         Gif gif = new Gif("123", "pokemon", "beschreibung", "20");
@@ -52,7 +56,7 @@ class GifControllerTest {
                 """;
 
         //when
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/gifs"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/gifs").with(csrf()))
                 //then
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(expected));
@@ -60,6 +64,7 @@ class GifControllerTest {
 
     @Test
     @DirtiesContext
+    @WithMockUser
     void expectGif_whenGettingById() throws Exception{
         //Given
         List<Gif> gifs = new ArrayList<>();
@@ -85,6 +90,7 @@ class GifControllerTest {
 
     @Test
     @DirtiesContext
+    @WithMockUser
     void expectUpdatedGifList_whenPOSTNewGif() throws Exception {
         // GIVEN
         String gifWithoutId = """
@@ -95,7 +101,7 @@ class GifControllerTest {
         }
                             """;
         // WHEN
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/gifs").content(gifWithoutId).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/gifs").content(gifWithoutId).contentType(MediaType.APPLICATION_JSON).with(csrf()))
         // THEN
             .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
@@ -108,6 +114,7 @@ class GifControllerTest {
 
     @Test
     @DirtiesContext
+    @WithMockUser
     void expectUpdatedGif_whenEditGif() throws Exception{
         //GIVEN
         String initialGifWithoutId = """
@@ -117,7 +124,7 @@ class GifControllerTest {
                "price": "20"
                 }
                                 """;
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/gifs").content(initialGifWithoutId).contentType(MediaType.APPLICATION_JSON));
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/gifs").content(initialGifWithoutId).contentType(MediaType.APPLICATION_JSON).with(csrf()));
         String gifWithoutIdToPut="""
               {
                "name": "Pokemon",
@@ -137,7 +144,7 @@ class GifControllerTest {
 
 
         //WHEN
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/gifs/" + id).content(gifWithoutIdToPut).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/gifs/" + id).content(gifWithoutIdToPut).contentType(MediaType.APPLICATION_JSON).with(csrf()))
 
                 //THEN
                 .andExpect(MockMvcResultMatchers.content().json(updatedGif)).andExpect(status().isOk());
@@ -146,6 +153,7 @@ class GifControllerTest {
 
     @Test
     @DirtiesContext
+    @WithMockUser
     void expectedDeleteExistingGif_whenDeleteGif() throws Exception {
         //GIVEN
         List<Gif> gifs = new ArrayList<>();
@@ -155,7 +163,7 @@ class GifControllerTest {
 
         //WHEN
         mockMvc.perform(
-                MockMvcRequestBuilders.delete("/api/gifs/" + id)
+                MockMvcRequestBuilders.delete("/api/gifs/" + id).with(csrf())
         )
 
         //THEN
