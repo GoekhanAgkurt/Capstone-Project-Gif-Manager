@@ -10,17 +10,19 @@ import {useEffect, useState} from "react";
 import EditGif from "./components/EditGif.tsx";
 import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import LoginPage from "./components/LoginPage.tsx";
+import ProtectedRoutes from "./components/ProtectedRoutes.tsx";
 
 
 
 export default function App() {
 
+    const[user, setUser] = useState<string>();
+
     const navigate = useNavigate();
     const [gifs, setGifs] = useState<Gif[]>([]);
 
-    useEffect(() => {
-        fetchGifs();
-    }, []);
+
 
 
     useEffect(() => {
@@ -30,7 +32,30 @@ export default function App() {
             .then(data => setGifs(data))
     }, [])
 
+    
+    function login(username: string, password: string) {
+        axios.post("/api/users/login", null, {auth: {username, password}})
+            .then((response) => {
+                console.log(response)
+                setUser(response.data)
+                navigate("/")
+            })
+            .catch((error) => {console.log(error)})
+    }
 
+    function me(){
+        axios.get("/api/users/me")
+            .then(response=>{
+                setUser(response.data)
+            })
+    }
+
+    useEffect(()=> {
+        fetchGifs()
+        me()
+    }, [])
+    
+    
     function handleAddGif(data: GifWithoutId) {
         axios.post('/api/gifs', data)
             .then(response => response.data)
@@ -89,10 +114,18 @@ export default function App() {
                 style={{width: "95%", color:"red"}}
             />
 
+
             <Header/>
+            <p style={{color: "#27214B", fontSize: "14px", padding: "0 20px", textAlign: "right", marginTop:"-45px"}}>{user}   </p>
+
+
             <Routes>
-                <Route path={"/add"} element={<AddPage onAddGif={handleAddGif}/>}/>
-                <Route path={"/"} element={
+
+                <Route element={<ProtectedRoutes user={user}/>}>
+
+                  <Route path={"/add"} element={<AddPage onAddGif={handleAddGif}/>}/>
+
+                  <Route path={"/"} element={
                     (<Container sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                         <GifList gifs={gifs} onDeleteGif={deleteThisGif}/>
                         <Button  sx={{mt: 2, padding: 2, width: '90%', alignItems:"center", backgroundColor:"lightseagreen", color:"#27214B", fontWeight:"bold" }} variant="contained"
@@ -100,10 +133,15 @@ export default function App() {
                                  onClick={() => navigate("/add")}>
                             Add a new Gift
                         </Button>
-                    </Container>)
-                }/>
-                <Route path="/:id/edit" element={<EditGif onEditGif={handleEditGif} gifs ={gifs}/>} />
+                    </Container>)}/>
+
+                  <Route path="/:id/edit" element={<EditGif onEditGif={handleEditGif} gifs ={gifs}/>} />
+
+                    </Route>
+
+                  <Route path="/login" element={<LoginPage onLogin={login} />}/>
             </Routes>
+
 
 
         </>
