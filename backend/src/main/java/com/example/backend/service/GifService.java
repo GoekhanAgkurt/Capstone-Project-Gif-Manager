@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.Exception.NoSuchGifException;
 import com.example.backend.model.Gif;
 import com.example.backend.model.GifWithoutId;
 import com.example.backend.repository.GifRepository;
@@ -40,7 +41,7 @@ public class GifService {
 
     public Gif getGifById(String id) {
         return this.gifRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Gif mit der ID " + id + " wurde nicht gefunden"));
+                .orElseThrow(() -> new NoSuchGifException("Gif mit der ID " + id + " wurde nicht gefunden"));
     }
 
 
