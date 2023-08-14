@@ -124,9 +124,17 @@ export default function App() {
 
 
             <Header/>
-            <p style={{color: "#27214B", fontSize: "14px", padding: "0 20px", textAlign: "right", marginTop:"-45px"}}>{user}   </p>
 
-            <button onClick={handleLogout} style={{ marginRight:"0px" , color: "#27214B", backgroundColor: "red", fontSize: "14px", padding: "5px", }} >logout</button>
+            <div style={{display:"flex", justifyContent:"right", marginTop: "-60px", marginRight:"10px",}}>
+            <p style={{ color: "#27214B", fontSize: "14px", marginRight:"15px",  }}>
+                {user ? user : "Nicht eingeloggt"}
+
+            </p>
+            {user && (
+                <button onClick={handleLogout} style={{  color: "#27214B", background:"none", border:"none", fontSize: "14px", textDecoration:"underline", margin:"0px 10px 0 0px" }} >logout</button>
+            )}
+            </div>
+
 
             <Routes>
 
@@ -137,7 +145,7 @@ export default function App() {
                   <Route path={"/"} element={
                     (<Container sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                         <GifList gifs={gifs} onDeleteGif={deleteThisGif}/>
-                        <Button  sx={{mt: 2, padding: 2, width: '90%', alignItems:"center", backgroundColor:"lightseagreen", color:"#27214B", fontWeight:"bold" }} variant="contained"
+                        <Button  sx={{mt: 2, padding: 2, width: '100%', alignItems:"center", backgroundColor:"lightseagreen", color:"#27214B", fontWeight:"bold" }} variant="contained"
                                  disableElevation
                                  onClick={() => navigate("/add")}>
                             Add a new Gift
