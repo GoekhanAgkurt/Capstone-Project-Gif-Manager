@@ -31,8 +31,8 @@ public class SecurityConfig {
                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                        .csrfTokenRequestHandler(requestHandler))
                 .httpBasic(Customizer.withDefaults())
-               .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-               .and()
+               .sessionManagement(httpSecuritySessionManagementConfigurer ->
+                       httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests(httpRequests ->
                 httpRequests
                         .requestMatchers(HttpMethod.GET,"api/gifs").permitAll()
@@ -43,6 +43,7 @@ public class SecurityConfig {
                         .requestMatchers("api/users/me").permitAll()
                         .anyRequest().permitAll()
                 )
+               .logout(logout -> logout.logoutUrl("/api/users/logout"))
                 .build();
 
     }

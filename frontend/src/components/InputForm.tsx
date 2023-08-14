@@ -21,6 +21,11 @@ export default function InputForm(props: Props) {
     const [name,setName] = useState<string>("");
     const [description,setDescription ] = useState<string>("");
     const [price, setPrice] = useState<string>("");
+    const [errorName, setErrorName] = useState<string>("");
+    const [errorDescription, setErrorDescription] = useState<string>("");
+    const [errorPrice, setErrorPrice] = useState<string>("");
+
+
 
     const navigate = useNavigate()
 
@@ -64,12 +69,34 @@ export default function InputForm(props: Props) {
 
     function handleNameInput(event: ChangeEvent<HTMLInputElement>) {
     setName(event.target.value)
+
+        if(event.target.value.length <= 3) {
+            setErrorName("Mindestens vier Buchstaben!")
+        }
+        else {
+           setErrorName("")
+        }
     }
 
     function handleDescriptionInput(event: ChangeEvent<HTMLInputElement>) {
         setDescription(event.target.value)
-    }    function handlePriceInput(event: ChangeEvent<HTMLInputElement>) {
-        setPrice(event.target.value)
+        if(event.target.value.length <= 3) {
+            setErrorDescription("Mindestens vier Buchstaben!")
+        }
+        else {
+            setErrorDescription("")
+        }
+    }
+
+    function handlePriceInput(event: ChangeEvent<HTMLInputElement>) {
+        const inputValue = event.target.value;
+
+        if (/^\d+$/.test(inputValue)) {
+            setPrice(inputValue);
+            setErrorPrice("");
+        } else {
+            setErrorPrice("Nur Ziffern erlaubt!");
+        }
     }
 
 
@@ -83,6 +110,7 @@ export default function InputForm(props: Props) {
                            type="text"
                            value={name}
                            id="name"
+                           helperText={"falschhhh"}
                            onChange={handleNameInput}
                            InputLabelProps={{
                                style: {
@@ -95,7 +123,11 @@ export default function InputForm(props: Props) {
                                },
                            }}
                            required
+
+
                 />
+                <p style={{color:"red", marginTop: "5px", marginBottom: "0px", fontSize: "14px"}}> {errorName}</p>
+
                 <TextField sx={{ml: 0, width: '100%', mt:2, borderStyle:"red"}}
                            label="Description"
                            type="text"
@@ -114,6 +146,8 @@ export default function InputForm(props: Props) {
                            }}
                            required
                 />
+                <p style={{color:"red", marginTop: "5px", marginBottom: "0px", fontSize: "14px"}}> {errorDescription}</p>
+
                 <TextField sx={{ml: 0, width: '100%', Color: "#72BBDB", mt:2 }}
                            label="Price in Euro"
                            type="text"
@@ -132,6 +166,8 @@ export default function InputForm(props: Props) {
                            }}
                            required
                 />
+                <p style={{color:"red", marginTop: "5px", marginBottom: "0px", fontSize: "14px"}}> {errorPrice}</p>
+
                 <Button sx={{mt: 4, mr: 1, padding: 2, width: '100%',  backgroundColor: "lightseagreen", color:"#27214B", fontWeight:"bold"}} type="submit" variant="contained" className="button-right" >
                     Submit
                 </Button>

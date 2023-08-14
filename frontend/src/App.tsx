@@ -43,6 +43,14 @@ export default function App() {
             .catch((error) => {console.log(error)})
     }
 
+    function handleLogout(){
+        axios.post("/api/gif/logout")
+            .catch(console.error)
+        setUser(undefined)
+    }
+
+
+
     function me(){
         axios.get("/api/users/me")
             .then(response=>{
@@ -118,6 +126,7 @@ export default function App() {
             <Header/>
             <p style={{color: "#27214B", fontSize: "14px", padding: "0 20px", textAlign: "right", marginTop:"-45px"}}>{user}   </p>
 
+            <button onClick={handleLogout} style={{ marginRight:"0px" , color: "#27214B", backgroundColor: "red", fontSize: "14px", padding: "5px", }} >logout</button>
 
             <Routes>
 
