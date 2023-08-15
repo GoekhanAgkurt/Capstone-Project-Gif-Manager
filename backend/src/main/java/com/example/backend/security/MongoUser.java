@@ -6,11 +6,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 
 @Document("users")
-public class MongoUser {
+public record MongoUser (
 
     @Id
-    String id;
-    String username;
+    String id,
 
-    String password;
-}
+    String username,
+
+    String password
+
+){}

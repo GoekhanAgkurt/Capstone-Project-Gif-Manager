@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 
 @Service
-public class MongoUserDetailsService implements UserDetailsService {
+public class MongoUserDetailService implements UserDetailsService {
 
     private final MongoUserRepository mongoUserRepository;
 
-    public MongoUserDetailsService(MongoUserRepository mongoUserRepository) {
+    public MongoUserDetailService(MongoUserRepository mongoUserRepository) {
         this.mongoUserRepository = mongoUserRepository;
     }
 
@@ -24,6 +24,6 @@ public class MongoUserDetailsService implements UserDetailsService {
       MongoUser mongoUser = mongoUserRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("username: " + username + " not found"));
 
-      return new User(mongoUser.username, mongoUser.password, Collections.emptyList());
+      return new User(mongoUser.username(), mongoUser.password(), Collections.emptyList());
     }
 }
