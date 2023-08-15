@@ -127,11 +127,13 @@ export default function App() {
 
             <div style={{display:"flex", justifyContent:"right", marginTop: "-60px", marginRight:"10px",}}>
             <p style={{ color: "#27214B", fontSize: "14px", marginRight:"15px",  }}>
-                {user ? user : "Nicht eingeloggt"}
+                {user && user}
 
             </p>
-            {user && (
-                <button onClick={handleLogout} style={{  color: "#27214B", background:"none", border:"none", fontSize: "14px", textDecoration:"underline", margin:"0px 10px 0 0px" }} >logout</button>
+                {(user !== undefined && user !== "anonymousUser") && (
+                <button onClick={handleLogout} style={{  color: "#27214B", background:"none", border:"none", fontSize: "14px", textDecoration:"underline", margin:"0px 10px 0 0px" }} >
+
+                    logout</button>
             )}
             </div>
 
