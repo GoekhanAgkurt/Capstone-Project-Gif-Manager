@@ -1,7 +1,6 @@
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {useNavigate,} from "react-router-dom";
 import {Gif} from "../models.ts";
 
@@ -14,13 +13,12 @@ type Props= {
 export default function GifCard(props: Props) {
 
     const {name, description, price} = props.gif;
-    const theme = createTheme({});
     const navigate = useNavigate();
 
 
 
     return (
-        <ThemeProvider theme={theme}>
+            <div style={{width: "100%"}}>
             <Card sx={{ Width:'100%', height: '100%',}}>
                     <CardContent style={{background: '#72BBDB', width: '100%'}}>
                         <Typography variant="body1">
@@ -33,14 +31,12 @@ export default function GifCard(props: Props) {
                             <b>Price:</b> {price} <> Euro </>
                         </Typography>
 
-                        <button onClick={() => props.onDeleteGif(props.gif.id)}> Löschen </button>
+                        <button onClick={() => props.onDeleteGif(props.gif.id)}> DELETE </button>
 
-                        <button  onClick={() => navigate(`/${props.gif.id}/edit`)}>
-                            Edit
-                        </button>
+                        <button  onClick={() => navigate(`/${props.gif.id}/edit`)}> EDIT</button>
 
                     </CardContent>
             </Card>
-        </ThemeProvider>
+            </div>
     );
 }

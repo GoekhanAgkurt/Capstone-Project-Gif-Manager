@@ -79,4 +79,6 @@ class GifServiceTest {
         verify(gifRepository, times(1)).delete(existingGif);
     }
 
+
+
 }
