@@ -12,4 +12,5 @@ public class GifWithoutId {
     private String name;
     private String description;
     private String price;
+    private boolean status;
 }

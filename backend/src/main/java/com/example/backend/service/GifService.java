@@ -26,7 +26,7 @@ public class GifService {
 
     public Gif addGif(GifWithoutId gifWithoutId) {
         String id = uuIdService.getRandomId();
-        Gif gif = new Gif(id, gifWithoutId.getName(), gifWithoutId.getDescription(), gifWithoutId.getPrice());
+        Gif gif = new Gif(id, gifWithoutId.getName(), gifWithoutId.getDescription(), gifWithoutId.getPrice(), gifWithoutId.isStatus());
         return this.gifRepository.insert(gif);
     }
 
@@ -34,7 +34,7 @@ public class GifService {
         Gif gif = this.gifRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Gif with Id" + id + "not found"));
 
-        Gif editedGif = new Gif(gif.getId(), g.getName(), g.getDescription(), g.getPrice());
+        Gif editedGif = new Gif(gif.getId(), g.getName(), g.getDescription(), g.getPrice(), g.isStatus());
         return this.gifRepository.save(editedGif);
     }
 

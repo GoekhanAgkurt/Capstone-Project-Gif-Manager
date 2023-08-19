@@ -28,4 +28,6 @@ public class Gif {
 
     @NotNull
     private String price;
+
+    private boolean status;
 }
