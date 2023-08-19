@@ -80,7 +80,6 @@ export default function App() {
             .then(data => setGifs(data));
         toast.success("Dein Gift wurde erfolgreich bearbeitet!")
 
-
     }
 
     function fetchGifs() {
@@ -102,8 +101,9 @@ export default function App() {
                 navigate("/")
             })
         toast.error("Dein Gift wurde gelöscht!")
-
     }
+
+
 
 
     return (
@@ -146,8 +146,8 @@ export default function App() {
 
                   <Route path={"/"} element={
                     (<Container sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-                        <GifList gifs={gifs} onDeleteGif={deleteThisGif}/>
-                        <Button  sx={{mt: 2, padding: 2, width: '100%', alignItems:"center", backgroundColor:"lightseagreen", color:"#27214B", fontWeight:"bold" }} variant="contained"
+                        <GifList gifs={gifs} onDeleteGif={deleteThisGif} onEditGif={handleEditGif} />
+                        <Button  sx={{mt: 2, padding: 2, width: '100%', alignItems:"center", backgroundColor:"lightseagreen", color:"white", fontWeight:"bold" }} variant="contained"
                                  disableElevation
                                  onClick={() => navigate("/add")}>
                             Add a new Gift
@@ -160,6 +160,8 @@ export default function App() {
 
                   <Route path="/login" element={<LoginPage onLogin={login} />}/>
             </Routes>
+
+
 
 
 

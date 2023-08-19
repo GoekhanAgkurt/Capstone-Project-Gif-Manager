@@ -67,6 +67,8 @@ export default function LoginPage(props: Props){
                     className="button-right" >
                 Login
             </Button>
+
+            <p style={{textAlign:"center", color:"color"}}> Du hast kein Konto? <b>Registrieren</b></p>
         </form>
         </div>
     )
