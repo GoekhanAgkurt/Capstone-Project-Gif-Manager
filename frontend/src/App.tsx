@@ -80,7 +80,6 @@ export default function App() {
             .then(data => setGifs(data));
         toast.success("Dein Gift wurde erfolgreich bearbeitet!")
 
-
     }
 
     function fetchGifs() {
@@ -102,8 +101,9 @@ export default function App() {
                 navigate("/")
             })
         toast.error("Dein Gift wurde gelöscht!")
-
     }
+
+
 
 
     return (
@@ -126,12 +126,12 @@ export default function App() {
             <Header/>
 
             <div style={{display:"flex", justifyContent:"right", marginTop: "-60px", marginRight:"10px",}}>
-            <p style={{ color: "#27214B", fontSize: "14px", marginRight:"15px",  }}>
+            <p style={{ color: "white", fontSize: "14px", marginRight:"15px",  }}>
                 {user && user}
 
             </p>
                 {(user !== undefined && user !== "anonymousUser") && (
-                <button onClick={handleLogout} style={{  color: "#27214B", background:"none", border:"none", fontSize: "14px", textDecoration:"underline", margin:"0px 10px 0 0px" }} >
+                <button onClick={handleLogout} style={{  color: "white", background:"none", border:"none", fontSize: "14px", textDecoration:"underline", margin:"0px -15px 0 0px" }} >
 
                     logout</button>
             )}
@@ -146,8 +146,8 @@ export default function App() {
 
                   <Route path={"/"} element={
                     (<Container sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-                        <GifList gifs={gifs} onDeleteGif={deleteThisGif}/>
-                        <Button  sx={{mt: 2, padding: 2, width: '100%', alignItems:"center", backgroundColor:"lightseagreen", color:"#27214B", fontWeight:"bold" }} variant="contained"
+                        <GifList gifs={gifs} onDeleteGif={deleteThisGif} onEditGif={handleEditGif} />
+                        <Button  sx={{mt: 2, padding: 2, width: '100%', alignItems:"center", backgroundColor:"lightseagreen", color:"white", fontWeight:"bold" }} variant="contained"
                                  disableElevation
                                  onClick={() => navigate("/add")}>
                             Add a new Gift
@@ -160,6 +160,8 @@ export default function App() {
 
                   <Route path="/login" element={<LoginPage onLogin={login} />}/>
             </Routes>
+
+
 
 
 

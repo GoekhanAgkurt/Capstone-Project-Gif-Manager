@@ -21,13 +21,19 @@ export default function InputForm(props: Props) {
     const [name,setName] = useState<string>("");
     const [description,setDescription ] = useState<string>("");
     const [price, setPrice] = useState<string>("");
+    const [status, setStatus] = useState<boolean>(false);
+
+
     const [errorName, setErrorName] = useState<string>("");
     const [errorDescription, setErrorDescription] = useState<string>("");
     const [errorPrice, setErrorPrice] = useState<string>("");
 
 
 
+
     const navigate = useNavigate()
+
+
 
 
     // Wenn ein gif-Objekt vorhanden ist, initialisiere die State-Variablen mit den alten Werten
@@ -37,6 +43,8 @@ export default function InputForm(props: Props) {
             setName(props.gif.name);
             setDescription(props.gif.description);
             setPrice(props.gif.price);
+            setStatus(props.gif.status);
+
         }
     }, [props.gif]);
 
@@ -47,7 +55,8 @@ export default function InputForm(props: Props) {
                 const data = {
                 name: name,
                 description: description,
-                price: price
+                price: price,
+                status: status
             }
                 props.onAddGif(data);
             }
@@ -57,12 +66,15 @@ export default function InputForm(props: Props) {
                     id: props.gif.id,
                     name: name,
                     description: description,
-                    price: price
+                    price: price,
+                    status: status
                 }
                 props.onEditGif(data);
             }
         navigate("/")
     }
+
+
 
 
 
@@ -100,26 +112,28 @@ export default function InputForm(props: Props) {
     }
 
 
+
+
     return (
         <form style={{maxWidth: "100%", alignItems: "center", marginTop: "50px" }} onSubmit={handleSubmit}>
             <fieldset style={{border: "none", fontFamily:"bodoni" }}>
-                <legend style={{marginBottom: '0px',  fontWeight: 'bold', fontSize: '25px'}}>Add new Gift</legend>
+                <legend style={{marginBottom: '0px',  fontWeight: 'bold', fontSize: '25px', color:"lightseagreen"}}>{props.legend}</legend>
 
                 <TextField sx={{ml: 0, width: '100%', border:"#72BBDB", mt:2, }}
                            label="Name of the Gift"
                            type="text"
                            value={name}
                            id="name"
-                           helperText={"falschhhh"}
+                           helperText={""}
                            onChange={handleNameInput}
                            InputLabelProps={{
                                style: {
-                                   color: "#72BBDB", fontWeight: "lighter" , backgroundColor:"#27214B", padding: "0 2px 0 5px",
+                                   fontWeight: "lighter"
                                },
                            }}
                            InputProps={{
                                style: {
-                                   border: "1px solid rgba(114, 187, 219, 0.5)", color: "#72BBDB", fontWeight: "lighter",
+                                    fontWeight: "lighter",
                                },
                            }}
                            required
@@ -136,12 +150,12 @@ export default function InputForm(props: Props) {
                            onChange={handleDescriptionInput}
                            InputLabelProps={{
                                style: {
-                                   color: "#72BBDB", fontWeight: "lighter" , backgroundColor:"#27214B", padding: "0 2px 0 5px",
+                                   fontWeight: "lighter"
                                },
                            }}
                            InputProps={{
                                style: {
-                                   border: "1px solid rgba(114, 187, 219, 0.5)", color: "#72BBDB", fontWeight: "lighter",
+                                    fontWeight: "lighter",
                                },
                            }}
                            required
@@ -156,19 +170,20 @@ export default function InputForm(props: Props) {
                            onChange={handlePriceInput}
                            InputLabelProps={{
                                style: {
-                                   color: "#72BBDB", fontWeight: "lighter" , backgroundColor:"#27214B", padding: "0 2px 0 5px",
+                                   fontWeight: "lighter" ,
                                },
                            }}
                            InputProps={{
                                style: {
-                                   border: "1px solid rgba(114, 187, 219, 0.5)", color: "#72BBDB", fontWeight: "lighter",
+                                   fontWeight: "lighter",
                                },
                            }}
                            required
                 />
                 <p style={{color:"red", marginTop: "5px", marginBottom: "0px", fontSize: "14px"}}> {errorPrice}</p>
 
-                <Button sx={{mt: 4, mr: 1, padding: 2, width: '100%',  backgroundColor: "lightseagreen", color:"#27214B", fontWeight:"bold"}} type="submit" variant="contained" className="button-right" >
+
+                <Button sx={{mt: 4, mr: 1, padding: 2, width: '100%',  backgroundColor: "lightseagreen", color:"white", fontWeight:"bold"}} type="submit" variant="contained" className="button-right" >
                     Submit
                 </Button>
 
@@ -177,7 +192,5 @@ export default function InputForm(props: Props) {
                 </Button>
             </fieldset>
         </form>
-
-
     )
 }

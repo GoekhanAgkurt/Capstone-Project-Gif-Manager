@@ -21,7 +21,7 @@ class GifServiceTest {
     @Test
     void expectedAllGifs_whenGetList() {
         //GIVEN
-        Gif gif = new Gif("123", "pokemon", "beschreibung", "20");
+        Gif gif = new Gif("123", "pokemon", "beschreibung", "20", false);
         List<Gif> expected = new ArrayList<>(List.of(gif));
 
         //WHEN
@@ -35,9 +35,9 @@ class GifServiceTest {
     @Test
     void expectedGif_whenAddGif() {
         // GIVEN
-        GifWithoutId gifWithoutId = new GifWithoutId("name", "description", "price");
+        GifWithoutId gifWithoutId = new GifWithoutId("name", "description", "price",false);
         String randomId = "123";
-        Gif expectedGif = new Gif("123","name", "description", "price");
+        Gif expectedGif = new Gif("123","name", "description", "price", false);
         // WHEN
         when(uuIdService.getRandomId()).thenReturn(randomId);
         when(gifRepository.insert(expectedGif)).thenReturn(expectedGif);
@@ -52,8 +52,8 @@ class GifServiceTest {
     void expectedEditedGifs_whenEditingGif() {
         //GIVEN
         String id = "123";
-        GifWithoutId gifWithoutId = new GifWithoutId("name", "description", "price");
-        Gif expected = new Gif("123", "name", "description", "price");
+        GifWithoutId gifWithoutId = new GifWithoutId("name", "description", "price", false);
+        Gif expected = new Gif("123", "name", "description", "price", false);
         //WHEN
         when(gifRepository.findById(id)).thenReturn(Optional.of(expected));
         when(gifRepository.save(expected)).thenReturn(expected);
@@ -78,7 +78,5 @@ class GifServiceTest {
         //then
         verify(gifRepository, times(1)).delete(existingGif);
     }
-
-
 
 }

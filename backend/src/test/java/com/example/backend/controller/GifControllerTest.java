@@ -41,7 +41,7 @@ class GifControllerTest {
     @WithMockUser
     void expectedGifList_whenGettingGifList() throws Exception {
         //Given
-        Gif gif = new Gif("123", "pokemon", "beschreibung", "20");
+        Gif gif = new Gif("123", "pokemon", "beschreibung", "20", false);
         gifRepository.insert(gif);
 
         String expected = """
@@ -50,7 +50,9 @@ class GifControllerTest {
                             "id": "123",
                             "name": "pokemon",
                             "description": "beschreibung",
-                            "price": "20"
+                            "price": "20",
+                            "status": false
+
                         }
                     ]
                 """;
@@ -68,7 +70,7 @@ class GifControllerTest {
     void expectGif_whenGettingById() throws Exception{
         //Given
         List<Gif> gifs = new ArrayList<>();
-        gifs.add(new Gif("123", "Pokemon", "Beschreibung","20"));
+        gifs.add(new Gif("123", "Pokemon", "Beschreibung","20", false));
         gifRepository.insert(gifs);
         String id = gifService.list().get(0).getId();
 
@@ -77,7 +79,8 @@ class GifControllerTest {
                             "id": "123",
                             "name": "Pokemon",
                             "description": "Beschreibung",
-                            "price": "20"
+                            "price": "20",
+                            "status": false
                          }
                 """;
 
@@ -157,7 +160,7 @@ class GifControllerTest {
     void expectedDeleteExistingGif_whenDeleteGif() throws Exception {
         //GIVEN
         List<Gif> gifs = new ArrayList<>();
-        gifs.add(new Gif("123","Pokemon", "auf Amazon", "20" ));
+        gifs.add(new Gif("123","Pokemon", "auf Amazon", "20", false ));
         gifRepository.insert(gifs);
         String id = gifService.list().get(0).getId();
 

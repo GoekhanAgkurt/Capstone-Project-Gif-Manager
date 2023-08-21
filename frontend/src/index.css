@@ -1,5 +1,5 @@
 body {
-    background-color: #27214B ;
+    background-color: #DCDCDC ;
     margin: 0;
 }
 
@@ -15,14 +15,20 @@ h1 {
 
 h2 {
     font-family: Arial, sans-serif;
-    color: #27214B;
+    color: yellow;
     margin: 0;
 }
 
 h3 {
     font-family: Arial, sans-serif;
-    color: #72BBDB;
+    color: lightseagreen;
     font-size: 25px;
+}
+
+h4 {
+    font-family: Arial, sans-serif;
+    color: black;
+    font-size: 22px;
 }
 
 h5 {
@@ -34,7 +40,7 @@ h5 {
 
 p {
     font-family: Arial, sans-serif;
-    color:#27214B;
+    color:#696969;
     font-weight: lighter;
 }
 
@@ -46,47 +52,39 @@ p {
 
 
 .header-container {
-    background-color: #72BBDB;
+    background-color: lightseagreen;
     display: flex;
     width: 100%;
     padding: 5px;
     margin-bottom:20px;
 }
 
- {
-    background-color: aquamarine;
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
+
 
 legend {
     color: #72BBDB;
     font-family: "Arial", sans-serif;
 }
 
-form {
-    border: none;
-}
+
 
 button {
-    background-color: #27214B;
+    background-color: lightseagreen	;
     padding: 10px 5px 10px 5px;
-    color: #72BBDB;
+    color: white;
     border-radius: 5px;
     margin-top: 20px;
     margin-right: 10px;
     font-family: Arial,  Serif;
     font-weight: bold;
-    min-width: 117px;
-    border: 1px #27214B solid;
+    min-width: 110px;
+    border-style: none;
 
 }
 
 button:hover {
-    background-color: #72BBDB;
-    border: 1px #27214B solid;
-    color: #27214B;
+    background-color: #66CDAA	;
+    color: white;
 }
 
 
