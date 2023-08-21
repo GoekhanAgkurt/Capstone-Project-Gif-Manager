@@ -20,7 +20,9 @@ export default function LoginPage(props: Props){
 
     return(
         <div style={{display: "flex", justifyContent: "center",}}>
-        <form style={{maxWidth: "90%", alignItems: "center", marginTop: "50px" }}onSubmit={onLogin}>
+        <form style= {{maxWidth: "90%", alignItems: "center", marginTop: "50px" }} onSubmit={onLogin}>
+
+
             <h3>Login</h3>
 
             <TextField

@@ -183,8 +183,6 @@ export default function InputForm(props: Props) {
                 <p style={{color:"red", marginTop: "5px", marginBottom: "0px", fontSize: "14px"}}> {errorPrice}</p>
 
 
-
-
                 <Button sx={{mt: 4, mr: 1, padding: 2, width: '100%',  backgroundColor: "lightseagreen", color:"white", fontWeight:"bold"}} type="submit" variant="contained" className="button-right" >
                     Submit
                 </Button>
@@ -194,7 +192,5 @@ export default function InputForm(props: Props) {
                 </Button>
             </fieldset>
         </form>
-
-
     )
 }

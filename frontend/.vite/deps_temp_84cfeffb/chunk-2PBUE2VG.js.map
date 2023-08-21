@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../node_modules/@mui/material/styles/useTheme.js"],
-  "sourcesContent": ["'use client';\n\nimport * as React from 'react';\nimport { useTheme as useThemeSystem } from '@mui/system';\nimport defaultTheme from './defaultTheme';\nimport THEME_ID from './identifier';\nexport default function useTheme() {\n  const theme = useThemeSystem(defaultTheme);\n  if (process.env.NODE_ENV !== 'production') {\n    // eslint-disable-next-line react-hooks/rules-of-hooks\n    React.useDebugValue(theme);\n  }\n  return theme[THEME_ID] || theme;\n}"],
-  "mappings": ";;;;;;;;;;;;;AAEA,YAAuB;AAIR,SAAR,WAA4B;AACjC,QAAM,QAAQ,iBAAe,oBAAY;AACzC,MAAI,MAAuC;AAEzC,IAAM,oBAAc,KAAK;AAAA,EAC3B;AACA,SAAO,MAAM,kBAAQ,KAAK;AAC5B;",
-  "names": []
-}
