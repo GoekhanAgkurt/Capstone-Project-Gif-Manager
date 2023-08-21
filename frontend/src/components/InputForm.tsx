@@ -117,7 +117,7 @@ export default function InputForm(props: Props) {
     return (
         <form style={{maxWidth: "100%", alignItems: "center", marginTop: "50px" }} onSubmit={handleSubmit}>
             <fieldset style={{border: "none", fontFamily:"bodoni" }}>
-                <legend style={{marginBottom: '0px',  fontWeight: 'bold', fontSize: '25px'}}>{props.legend}</legend>
+                <legend style={{marginBottom: '0px',  fontWeight: 'bold', fontSize: '25px', color:"lightseagreen"}}>{props.legend}</legend>
 
                 <TextField sx={{ml: 0, width: '100%', border:"#72BBDB", mt:2, }}
                            label="Name of the Gift"
@@ -128,12 +128,12 @@ export default function InputForm(props: Props) {
                            onChange={handleNameInput}
                            InputLabelProps={{
                                style: {
-                                   color: "#72BBDB", fontWeight: "lighter" , backgroundColor:"#27214B", padding: "0 2px 0 5px",
+                                   fontWeight: "lighter"
                                },
                            }}
                            InputProps={{
                                style: {
-                                   border: "1px solid rgba(114, 187, 219, 0.5)", color: "#72BBDB", fontWeight: "lighter",
+                                    fontWeight: "lighter",
                                },
                            }}
                            required
@@ -150,12 +150,12 @@ export default function InputForm(props: Props) {
                            onChange={handleDescriptionInput}
                            InputLabelProps={{
                                style: {
-                                   color: "#72BBDB", fontWeight: "lighter" , backgroundColor:"#27214B", padding: "0 2px 0 5px",
+                                   fontWeight: "lighter"
                                },
                            }}
                            InputProps={{
                                style: {
-                                   border: "1px solid rgba(114, 187, 219, 0.5)", color: "#72BBDB", fontWeight: "lighter",
+                                    fontWeight: "lighter",
                                },
                            }}
                            required
@@ -170,12 +170,12 @@ export default function InputForm(props: Props) {
                            onChange={handlePriceInput}
                            InputLabelProps={{
                                style: {
-                                   color: "#72BBDB", fontWeight: "lighter" , backgroundColor:"#27214B", padding: "0 2px 0 5px",
+                                   fontWeight: "lighter" ,
                                },
                            }}
                            InputProps={{
                                style: {
-                                   border: "1px solid rgba(114, 187, 219, 0.5)", color: "#72BBDB", fontWeight: "lighter",
+                                   fontWeight: "lighter",
                                },
                            }}
                            required
@@ -185,7 +185,7 @@ export default function InputForm(props: Props) {
 
 
 
-                <Button sx={{mt: 4, mr: 1, padding: 2, width: '100%',  backgroundColor: "lightseagreen", color:"#27214B", fontWeight:"bold"}} type="submit" variant="contained" className="button-right" >
+                <Button sx={{mt: 4, mr: 1, padding: 2, width: '100%',  backgroundColor: "lightseagreen", color:"white", fontWeight:"bold"}} type="submit" variant="contained" className="button-right" >
                     Submit
                 </Button>
 

@@ -21,7 +21,7 @@ h2 {
 
 h3 {
     font-family: Arial, sans-serif;
-    color: black;
+    color: lightseagreen;
     font-size: 25px;
 }
 
@@ -52,28 +52,21 @@ p {
 
 
 .header-container {
-    background-color: #2f2f2f;
+    background-color: lightseagreen;
     display: flex;
     width: 100%;
     padding: 5px;
     margin-bottom:20px;
 }
 
- {
-    background-color: aquamarine;
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
+
 
 legend {
     color: #72BBDB;
     font-family: "Arial", sans-serif;
 }
 
-form {
-    border: none;
-}
+
 
 button {
     background-color: lightseagreen	;
@@ -90,8 +83,8 @@ button {
 }
 
 button:hover {
-    background-color: #72BBDB;
-    color: #27214B;
+    background-color: #66CDAA	;
+    color: white;
 }
 
 
